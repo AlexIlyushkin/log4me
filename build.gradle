@@ -1,0 +1,26 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'java-library'
+}
+
+group 'ru.ilyushkin.log4me'
+version '0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.5.31')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "ch.qos.logback:logback-core:1.2.6"
+    implementation "org.slf4j:slf4j-api:1.7.30"
+    runtimeClasspath "ch.qos.logback:logback-classic:1.2.6"
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+    testImplementation 'io.mockk:mockk:1.12.2'
+}
+
+test {
+    useJUnitPlatform()
+}
