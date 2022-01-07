@@ -1,6 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'java-library'
+    id 'jacoco'
 }
 
 group 'ru.ilyushkin.log4me'
@@ -24,3 +25,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+
+check.dependsOn jacocoTestReport
