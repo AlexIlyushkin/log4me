@@ -103,4 +103,22 @@ class StringMessageTest {
         verify(exactly = 1) { messageBody.equals(messageBody1) }
         confirmVerified(messageBody, messageBody1)
     }
+
+    @Test
+    @DisplayName("hashCode(): returns hashcode of underlying message body")
+    fun `hashCode() test`() {
+        val messageBody = mockk<() -> String>()
+
+        val stringMessage = StringMessage(
+            messageBody = messageBody
+        )
+        val hashCodeResult: Int = stringMessage.hashCode()
+
+        assertEquals(
+            expected = messageBody.hashCode(),
+            actual = hashCodeResult
+        )
+        verify(exactly = 2) { messageBody.hashCode() }
+        confirmVerified(messageBody)
+    }
 }
