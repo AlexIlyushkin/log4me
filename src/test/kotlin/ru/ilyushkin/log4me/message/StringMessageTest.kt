@@ -1,7 +1,12 @@
 package ru.ilyushkin.log4me.message
 
+import io.mockk.confirmVerified
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 /**
@@ -36,5 +41,66 @@ class StringMessageTest {
         val asStringResult: String = stringMessage.asString()
 
         assertTrue { string === asStringResult }
+    }
+
+    @Test
+    @DisplayName("equals(Any): returns true on itself comparing")
+    fun `equals(Any) test for itself comparing`() {
+        val messageBody = mockk<() -> String>()
+
+        val stringMessage = StringMessage(
+            messageBody = messageBody
+        )
+
+        assertTrue { stringMessage == stringMessage }
+        confirmVerified(messageBody)
+    }
+
+    @Test
+    @DisplayName("equals(Any): returns false if an object of another type provided as parameter")
+    fun `equals(Any) for and object of another type`() {
+        val messageBody = mockk<() -> String>()
+
+        val stringMessage = StringMessage(
+            messageBody = messageBody
+        )
+
+        assertFalse { stringMessage.equals(Any()) }
+        confirmVerified(messageBody)
+    }
+
+    @Test
+    @DisplayName("equals(Any): returns true if compared StringMessages have the same message bodies")
+    fun `equals(Any) test for the same message bodies`() {
+        val messageBody = mockk<() -> String>()
+
+        val stringMessage = StringMessage(
+            messageBody = messageBody
+        )
+        val stringMessage1 = StringMessage(
+            messageBody = messageBody
+        )
+
+        assertTrue { stringMessage == stringMessage1 }
+        verify(exactly = 1) { messageBody.equals(messageBody) }
+        confirmVerified(messageBody)
+    }
+
+    @Test
+    @DisplayName("equals(Any): returns false if compared StringMessages have different message bodies")
+    fun `equals(Any) test for different message bodies`() {
+        val messageBody = mockk<() -> String>()
+        val messageBody1 = mockk<() -> String>()
+
+        val stringMessage = StringMessage(
+            messageBody = messageBody
+        )
+        val stringMessage1 = StringMessage(
+            messageBody = messageBody1
+        )
+
+        assertTrue { stringMessage != stringMessage1 }
+        verify(exactly = 1) { messageBody.equals(messageBody1) }
+        confirmVerified(messageBody, messageBody1)
     }
 }
