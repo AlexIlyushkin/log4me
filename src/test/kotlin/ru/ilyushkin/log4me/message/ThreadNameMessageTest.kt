@@ -99,4 +99,22 @@ class ThreadNameMessageTest {
         verify(exactly = 1) { message != message1 }
         confirmVerified(message, message1)
     }
+
+    @Test
+    @DisplayName("hashCode(): returns hash code of underlying message")
+    fun `hashCode() test`() {
+        val message = mockk<Message>()
+
+        val threadNameMessage = ThreadNameMessage(
+            origin = message
+        )
+        val hashCodeResult = threadNameMessage.hashCode()
+
+        assertEquals(
+            expected = message.hashCode(),
+            actual = hashCodeResult
+        )
+        verify(exactly = 2) { message.hashCode() }
+        confirmVerified(message)
+    }
 }
