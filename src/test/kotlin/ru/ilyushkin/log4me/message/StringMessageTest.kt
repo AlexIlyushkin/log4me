@@ -58,7 +58,7 @@ class StringMessageTest {
 
     @Test
     @DisplayName("equals(Any): returns false if an object of another type provided as parameter")
-    fun `equals(Any) for and object of another type`() {
+    fun `equals(Any) for object of another type`() {
         val messageBody = mockk<() -> String>()
 
         val stringMessage = StringMessage(
