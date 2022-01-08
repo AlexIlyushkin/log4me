@@ -75,7 +75,7 @@ class DebugLeveledLogJournalTest {
             justRun { log(message = message) }
         }
 
-        val debugLeveledLogJournal = TraceLeveledLogJournal(
+        val debugLeveledLogJournal = DebugLeveledLogJournal(
             logJournal = logJournal
         )
         debugLeveledLogJournal.logWarning(message = message)
