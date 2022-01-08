@@ -105,6 +105,19 @@ class StringMessageTest {
     }
 
     @Test
+    @DisplayName("equals(Any): returns false if null provided as parameter")
+    fun `equals(Any) test for null parameter`() {
+        val messageBody = mockk<() -> String>()
+
+        val stringMessage = StringMessage(
+            messageBody = messageBody
+        )
+
+        assertFalse { stringMessage.equals(null) }
+        confirmVerified(messageBody)
+    }
+
+    @Test
     @DisplayName("hashCode(): returns hashcode of underlying message body")
     fun `hashCode() test`() {
         val messageBody = mockk<() -> String>()
