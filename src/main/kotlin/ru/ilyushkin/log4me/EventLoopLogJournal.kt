@@ -31,7 +31,7 @@ class EventLoopLogJournal(
      */
     override fun start() {
         while (true) {
-            origin.log(eventQueue.take())
+            origin.log(message = eventQueue.take())
         }
     }
 }
