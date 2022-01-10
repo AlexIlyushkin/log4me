@@ -12,7 +12,7 @@ class CompositeLogJournal(
 ) : LogJournal {
 
     constructor(vararg logJournals: LogJournal)
-            : this(logJournals.asIterable())
+            : this(logJournals = logJournals.asIterable())
 
     /**
      * Delegates logging [Message] provided as parameter to all underlying [LogJournal]s
